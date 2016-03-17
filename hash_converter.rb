@@ -12,7 +12,6 @@ module HashConverter
       case obj
       when Hash
         obj.stringify_keys.inject({}) do |hash, (key, value)|
-          value = convert value, *method
           hash[key.send(*method)] = value
           hash
         end
@@ -24,4 +23,3 @@ module HashConverter
     end
   end
 end
-
