@@ -21,8 +21,8 @@ describe HashConverter do
       {"sale_source"      => "telemarketing"}]
     end
 
-    it 'shold convert hash to snake_case' do
-      expect(HashConverter.to_underscore(hash)).to eq result
+    it 'should convert keys to snake_case' do
+      expect(HashConverter.to_underscore(hash)).to eq(result)
     end
   end
 
@@ -44,8 +44,54 @@ describe HashConverter do
       {"SaleSource"       => "telemarketing"}]
     end
 
-    it 'shold convert hash to camel_case' do
-      expect(HashConverter.to_camel_case(hash)).to eq result
+    it 'should convert keys to camel_case' do
+      expect(HashConverter.to_camel_case(hash)).to eq(result)
+    end
+  end
+
+  context '#keys_to_string' do
+    let(:hash) do
+      [{free_sponsor_id:      "Test"},
+      {product_code:          "ABC"},
+      {associate_first:       "Shri"},
+      {associate_last:        "Shah"},
+      {associate_number:      "A8388392"},
+      {sale_source:           "telemarketing"}]
+    end
+    let(:result) do
+      [{"free_sponsor_id"  => "Test"},
+      {"product_code"      => "ABC"},
+      {"associate_first"   => "Shri"},
+      {"associate_last"    => "Shah"},
+      {"associate_number"  => "A8388392"},
+      {"sale_source"       => "telemarketing"}]
+    end
+
+    it 'should convert keys to string' do
+      expect(HashConverter.keys_to_string(hash)).to eq(result)
+    end
+  end
+
+  context '#keys_to_symbol' do
+    let(:hash) do
+      [{"free_sponsor_id"  => "Test"},
+      {"product_code"      => "ABC"},
+      {"associate_first"   => "Shri"},
+      {"associate_last"    => "Shah"},
+      {"associate_number"  => "A8388392"},
+      {"sale_source"       => "telemarketing"}]
+    end
+    let(:result) do
+      [{free_sponsor_id:      "Test"},
+      {product_code:          "ABC"},
+      {associate_first:       "Shri"},
+      {associate_last:        "Shah"},
+      {associate_number:      "A8388392"},
+      {sale_source:           "telemarketing"}]
+    end
+
+    it 'should convert keys to symbol' do
+      expect(HashConverter.keys_to_symbol(hash)).to eq(result)
     end
   end
 end

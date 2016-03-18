@@ -1,17 +1,31 @@
 module HashConverter
   class << self
+
+    # convert keys to snake_case
     def to_underscore hash
-      convert hash, :underscore
+      convert keys_to_string(hash), :underscore
     end
 
+    # convert keys to camel_case
     def to_camel_case hash
-      convert hash, :camelize
+      convert keys_to_string(hash), :camelize
     end
 
+    # convert keys to string
+    def keys_to_string hash
+      convert hash, :to_s
+    end
+
+    # convert keys to symbol
+    def keys_to_symbol hash
+      convert hash, :to_sym
+    end
+
+    # converting
     def convert obj, *method
       case obj
       when Hash
-        obj.stringify_keys.inject({}) do |hash, (key, value)|
+        obj.inject({}) do |hash, (key, value)|
           hash[key.send(*method)] = value
           hash
         end
